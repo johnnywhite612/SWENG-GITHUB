@@ -1,0 +1,23 @@
+{
+  "name": "sweng-github",
+  "version": "1.0.0",
+  "description": "SWENG Assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node interrogate.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnnywhite612/SWENG-GITHUB.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johnnywhite612/SWENG-GITHUB/issues"
+  },
+  "homepage": "https://github.com/johnnywhite612/SWENG-GITHUB#readme",
+  "dependencies": {
+    "octonode": "^0.9.5"
+  }
+}
