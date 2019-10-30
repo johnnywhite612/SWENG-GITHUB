@@ -9,6 +9,11 @@ function interrogateGithubAPI() {
                 console.log(body);
         });
 
+        //Check if my LCA assignment repo is public or private
+        let sampleRepo = client.repo('johnnywhite612/LowestCommonAncestor');
+        sampleRepo.info(function(err, data, headers) {
+                console.log("Is this repo private? Answer: " + (data.private == true ? 'YES' : 'NO'));
+              });
 }
 
 interrogateGithubAPI();
