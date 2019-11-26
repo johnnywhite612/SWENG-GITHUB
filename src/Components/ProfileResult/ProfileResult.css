@@ -5,11 +5,11 @@
   --yellow-color: #f9c73a;
   --light-grey-color: #f5f6f9;
   --black-color: #403c47;
-  --drop-shadow: 5px 5px 20px rgba(0, 0, 0, 0.23);
+  --drop-shadow: 5px 5px 20px rgba(0, 0, 0, 0.28);
 }
 
 .profile {
-  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.23));
+  filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.3));
   width: fit-content;
   height: fit-content;
   margin: 20px;
@@ -37,6 +37,8 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: -50px;
+  background-color: white;
+  border: 5px solid var(--light-grey-color);
 }
 
 .profile__h1 {

@@ -9,13 +9,25 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.SearchGithubUsers = this.SearchGithubUsers.bind(this);
+    this.ReturnKeyPressed = this.ReturnKeyPressed.bind(this);
+    this.state = {
+      searchQuery: null
+    };
   }
 
-  SearchGithubUsers() {
+  ReturnKeyPressed(e) {
+    if (e.key === "Enter") {
+      this.SearchGithubUsers();
+    }
+  }
+
+  SearchGithubUsers(input) {
     this.props.history.push({
       pathname: "/search",
       search: "",
-      state: {}
+      state: {
+        search: this.state.searchQuery
+      }
     });
   }
 
@@ -33,6 +45,8 @@ export default class Home extends React.Component {
               type="text"
               className="home__input-box"
               placeholder="E.g. Dublin, Ireland"
+              onKeyDown={e => this.ReturnKeyPressed(e)}
+              onChange={e => this.setState({ searchQuery: e.target.value })}
             />
             <div
               className="home__search-button"

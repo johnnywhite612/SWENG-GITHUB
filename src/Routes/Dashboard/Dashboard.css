@@ -102,6 +102,7 @@
   background-color: var(--purple-color);
   filter: drop-shadow(var(--drop-shadow));
   display: flex;
+  z-index: 25;
 }
 .dashboard__back-button:hover {
   cursor: grab;

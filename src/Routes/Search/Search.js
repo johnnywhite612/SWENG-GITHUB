@@ -16,7 +16,8 @@ export default class Search extends React.Component {
         { index: 3, name: "Haskell", selected: false },
         { index: 4, name: "HTML", selected: false },
         { index: 5, name: "CSS", selected: false }
-      ]
+      ],
+      users: []
     };
   }
 
@@ -30,8 +31,27 @@ export default class Search extends React.Component {
     this.props.history.goBack();
   }
 
+  componentDidMount() {
+    let searchQuery = this.props.location.state.search;
+
+    const Octokit = require("@octokit/rest");
+    const octokit = new Octokit({
+      auth: "9f84a0aa8cf6242e3d458f3b76446696b6720d39"
+    });
+
+    octokit.search
+      .users({
+        q: "type:org location:" + searchQuery,
+        per_page: 12,
+        page: 1
+      })
+      .then(({ data, headers, status }) => {
+        this.setState({ users: data.items });
+      });
+  }
+
   render() {
-    const result = this.state.languages.map(language => (
+    const languageTags = this.state.languages.map(language => (
       <div
         className={
           language.selected === true
@@ -42,6 +62,10 @@ export default class Search extends React.Component {
       >
         {language.name}
       </div>
+    ));
+
+    const profileResults = this.state.users.map(user => (
+      <Profile history={this.props.history} user={user} />
     ));
 
     return (
@@ -58,13 +82,11 @@ export default class Search extends React.Component {
         <div className="search__bottom-section">
           <div className="search__side-bar">
             <div className="search__purple-heading">Which languages:</div>
-            <div className="search__language-list">{result}</div>
+            <div className="search__language-list">{languageTags}</div>
             <hr></hr>
             <div className="search__purple-heading">Other metrics:</div>
           </div>
-          <div className="search__results-section">
-            <Profile history={this.props.history} />
-          </div>
+          <div className="search__results-section">{profileResults}</div>
         </div>
       </div>
     );

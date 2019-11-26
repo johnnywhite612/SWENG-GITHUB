@@ -102,6 +102,9 @@ h2 {
   text-align: center;
 }
 .home__input-box:hover {
+  cursor: text;
+}
+.home__input-box:hover {
   outline: none;
 }
 .home__input-box::placeholder {
