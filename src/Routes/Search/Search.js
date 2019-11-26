@@ -26,6 +26,10 @@ export default class Search extends React.Component {
     this.setState({ languages: update });
   }
 
+  CloseWindow() {
+    this.props.history.goBack();
+  }
+
   render() {
     const result = this.state.languages.map(language => (
       <div
@@ -45,7 +49,11 @@ export default class Search extends React.Component {
         <div className="search__top-bar">
           <span className="search__title-text">Location:</span>
           <span className="search__title-search">Dublin, Ireland</span>
-          <img src={closeBtn} className="search__close-btn" />
+          <img
+            src={closeBtn}
+            className="search__close-btn"
+            onClick={() => this.CloseWindow()}
+          />
         </div>
         <div className="search__bottom-section">
           <div className="search__side-bar">

@@ -3,11 +3,19 @@ import closeBtn from "../../assets/img/closeBtn.svg";
 import "./Dashboard.css";
 
 export default class Dashboard extends React.Component {
+  CloseWindow() {
+    this.props.history.goBack();
+  }
+
   render() {
     return (
       <div className="dashboard">
         <div className="dashboard__back-button">
-          <img src={closeBtn} className="dashboard__close-btn" />
+          <img
+            src={closeBtn}
+            className="dashboard__close-btn"
+            onClick={() => this.CloseWindow()}
+          />
         </div>
         <div className="dashboard__side-bar">
           <img

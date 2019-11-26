@@ -86,6 +86,10 @@ h2 {
   display: flex;
 }
 
+.home__search-button:hover {
+  cursor: grab;
+}
+
 .home__input-box {
   width: 450px;
   height: 70px;
