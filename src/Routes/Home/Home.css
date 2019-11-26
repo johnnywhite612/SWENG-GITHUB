@@ -1,0 +1,110 @@
+:root {
+  --purple-color: #7600ff;
+  --pink-color: #b200fb;
+  --pastel-pink-color: #e1ccf2;
+  --yellow-color: #f9c73a;
+  --light-grey-color: #f5f6f9;
+  --medium-grey-color: #dbdbdb;
+  --black-color: #403c47;
+  --drop-shadow: 7px 7px 20px 0px rgba(0, 0, 0, 0.23);
+}
+
+h1 {
+  font-family: "Calibre";
+  font-weight: bold;
+  font-size: 60px;
+  color: white;
+  margin: 0px;
+}
+
+h2 {
+  font-family: "Calibre";
+  font-weight: 400;
+  font-size: 40px;
+  color: var(--yellow-color);
+  margin: 0px;
+}
+
+/* Main Block Styles */
+.home {
+  background-image: linear-gradient(
+    25deg,
+    var(--pink-color) 20%,
+    var(--purple-color)
+  );
+
+  height: 100vh;
+  margin: 0px;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Element Styles */
+.home__logo {
+  position: fixed;
+  width: 350px;
+  left: 50px;
+  top: 50px;
+}
+
+.home__centre {
+  width: 900px;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.home__title-blurb {
+  text-align: center;
+}
+
+.home__search-bar {
+  -webkit-box-shadow: var(--shadowColor);
+  box-shadow: var(--shadowColor);
+  width: auto;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.home__search-button {
+  width: 80px;
+  height: 70px;
+  border-radius: 0px 45px 45px 0px;
+  background-color: var(--yellow-color);
+  display: flex;
+}
+
+.home__input-box {
+  width: 450px;
+  height: 70px;
+  border-radius: 45px 0px 0px 45px;
+  border: none;
+  font-size: 30px;
+  line-height: 30px;
+  padding: 0px;
+  padding-left: 30px;
+  text-align: center;
+}
+.home__input-box:hover {
+  outline: none;
+}
+.home__input-box::placeholder {
+  color: var(--medium-grey-color);
+}
+
+.home__search-icon {
+  width: 40px;
+  margin: 0 auto;
+}

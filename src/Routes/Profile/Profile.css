@@ -1,0 +1,13 @@
+:root {
+  --purple-color: #7600ff;
+  --pink-color: #b200fb;
+  --pastel-pink-color: #e1ccf2;
+  --yellow-color: #f9c73a;
+  --light-grey-color: #f5f6f9;
+  --black-color: #403c47;
+  --drop-shadow: 7px 7px 20px 0px rgba(0, 0, 0, 0.23);
+}
+
+/* Main Block Element */
+.profile {
+}

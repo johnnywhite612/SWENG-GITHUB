@@ -5,8 +5,9 @@ function interrogateGithubAPI() {
         var client = github.client();
 
         //Get the details associated with my own Github account
-        client.get('/users/johnnywhite612', {}, function (err, status, body, headers) {
+        client.get('/search/users', {}, function (err, status, body, headers) {
                 console.log(body);
+
         });
 
         //Check if my LCA assignment repo is public or private
@@ -14,6 +15,7 @@ function interrogateGithubAPI() {
         sampleRepo.info(function(err, data, headers) {
                 console.log("Is this repo private? Answer: " + (data.private == true ? 'YES' : 'NO'));
               });
+        
 }
 
 interrogateGithubAPI();
