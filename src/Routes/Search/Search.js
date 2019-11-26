@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 
+import Profile from "../../Components/ProfileResult/ProfileResult";
 import closeBtn from "../../assets/img/closeBtn.svg";
 import "./Search.css";
 
@@ -53,7 +54,9 @@ export default class Search extends React.Component {
             <hr></hr>
             <div className="search__purple-heading">Other metrics:</div>
           </div>
-          <div className="search__results-section"></div>
+          <div className="search__results-section">
+            <Profile history={this.props.history} />
+          </div>
         </div>
       </div>
     );

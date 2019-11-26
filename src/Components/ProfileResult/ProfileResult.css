@@ -1,0 +1,84 @@
+:root {
+  --purple-color: #7600ff;
+  --pink-color: #b200fb;
+  --pastel-pink-color: #e1ccf2;
+  --yellow-color: #f9c73a;
+  --light-grey-color: #f5f6f9;
+  --black-color: #403c47;
+  --drop-shadow: 5px 5px 20px rgba(0, 0, 0, 0.23);
+}
+
+.profile {
+  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.23));
+  width: fit-content;
+  height: fit-content;
+  margin: 20px;
+  margin-top: 80px;
+}
+
+.profile:hover {
+  cursor: grab;
+}
+
+.profile__card {
+  width: 250px;
+  height: 300px;
+  background-color: #f5f6f9;
+  border-radius: 30px;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+}
+
+.profile__image {
+  object-fit: cover;
+  border-radius: 50%;
+  width: 140px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -50px;
+}
+
+.profile__h1 {
+  font-family: "Calibre";
+  font-weight: bold;
+  font-size: 26px;
+  line-height: 26px;
+  color: var(--black-color);
+  margin: 0px;
+  margin-top: 15px;
+  text-align: center;
+}
+.profile__h2 {
+  font-family: "Calibre";
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 22px;
+  color: var(--purple-color);
+  margin: 0px;
+  text-align: center;
+}
+
+.profile__h2--normal {
+  font-weight: normal;
+}
+
+.profile__h3 {
+  font-family: "Calibre";
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 20px;
+  color: var(--black-color);
+  margin: 0px;
+  text-align: justify;
+  padding: 10px 20px 10px 20px;
+  text-overflow: ellipsis;
+}
+
+.profile__divider {
+  border: 1px solid #d6d6d6;
+  width: auto;
+  margin: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}

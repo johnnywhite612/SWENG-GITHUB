@@ -29,6 +29,7 @@
   height: 100%;
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 }
 
 .search__side-bar {
@@ -38,11 +39,17 @@
   height: 100%;
   background-color: var(--light-grey-color);
   padding: 25px;
+  margin-right: 20px;
 }
 
 .search__results-section {
   width: 73%;
   height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow: auto;
+  justify-content: start;
 }
 
 .search__close-btn {

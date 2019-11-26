@@ -1,0 +1,113 @@
+:root {
+  --purple-color: #7600ff;
+  --pink-color: #b200fb;
+  --pastel-pink-color: #e1ccf2;
+  --yellow-color: #f9c73a;
+  --light-grey-color: #f5f6f9;
+  --black-color: #403c47;
+  --drop-shadow: 4px 4px 15px rgba(0, 0, 0, 0.27);
+}
+
+/* Main Block Element */
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+}
+
+.dashboard__side-bar {
+  background-color: var(--purple-color);
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard__image {
+  object-fit: cover;
+  border-radius: 50%;
+  width: 140px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+.dashboard__profile-name {
+  font-family: "Calibre";
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 26px;
+  color: white;
+  margin: 0px;
+  margin-top: 25px;
+  text-align: center;
+}
+
+.dashboard__divider {
+  border: 1px solid #d6d6d6;
+  width: auto;
+  margin: 10px;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.dashboard__main {
+  display: flex;
+  width: 70%;
+  height: 100%;
+  flex-direction: column;
+}
+
+.dashboard__row {
+  display: flex;
+  flex-direction: row;
+}
+.dashboard__block {
+  width: 500px;
+  height: 300px;
+  border-radius: 30px;
+  background-color: var(--light-grey-color);
+  filter: drop-shadow(var(--drop-shadow));
+  margin: 40px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+}
+
+.dashboard__block--block-1 {
+  width: 500px;
+  height: 300px;
+}
+.dashboard__block--block-2 {
+  width: 350px;
+  height: 300px;
+}
+
+.dashboard__block--block-3 {
+  width: 350px;
+  height: 300px;
+}
+
+.dashboard__block--block-4 {
+  width: 450px;
+  height: 300px;
+}
+
+.dashboard__back-button {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 60px;
+  background-color: var(--purple-color);
+  filter: drop-shadow(var(--drop-shadow));
+  display: flex;
+}
+.dashboard__back-button:hover {
+  cursor: grab;
+}
+
+.dashboard__close-btn {
+  width: 40px;
+  margin: auto;
+}
