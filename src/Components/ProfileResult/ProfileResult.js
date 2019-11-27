@@ -2,6 +2,11 @@ import React from "react";
 import "./ProfileResult.css";
 import axios from "axios";
 export default class ProfileResult extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { languages: [] };
+  }
+
   OpenProfile() {
     this.props.history.push({
       pathname: "/profile",
@@ -18,6 +23,7 @@ export default class ProfileResult extends React.Component {
 
     let repos = [];
     let languageCalculations = new Map();
+    let finalRepo = "";
 
     //Get repos for user
     octokit.repos
@@ -25,16 +31,19 @@ export default class ProfileResult extends React.Component {
         org: this.props.user.login
       })
       .then(({ data, headers, status }) => {
+        console.log(JSON.stringify(data.length));
+        if (data.length > 0) finalRepo = data[data.length - 1].name;
+        console.log("FINAL REPO:" + finalRepo);
         data.forEach(repo => {
           if (repo) repos.push(repo);
         });
       })
       .then(() => {
         //With our list of repos, get the languages listed under each repo name
-        let itemsProcessed = 0;
         repos.forEach(repo => {
           //If the repo was forked, we won't consider it as owned by this user
           if (repo.fork === false) {
+            let selectedRepo = repo.name;
             octokit.repos
               .listLanguages({
                 owner: this.props.user.login,
@@ -42,7 +51,6 @@ export default class ProfileResult extends React.Component {
               })
               .then(({ data, headers, status }) => {
                 //The languages for the currently selected repo
-
                 let languageCounts = data;
                 Object.keys(languageCounts).forEach(language => {
                   let languageCount = languageCounts[language];
@@ -58,34 +66,20 @@ export default class ProfileResult extends React.Component {
                     languageCalculations.set(language, languageCount);
                   }
                 });
-
-                for (let [key, value] of languageCalculations) {
-                  console.log(key + " - " + value);
-                }
-                console.log("\n");
+                // console.log(
+                //   selectedRepo +
+                //     " vs " +
+                //     finalRepo +
+                //     " FOR " +
+                //     this.props.user.login
+                // );
+                this.setState({
+                  languages: JSON.stringify([...languageCalculations])
+                });
               });
-          } else {
-            console.log("WAS FORKED: " + repo.fork);
-          }
-
-          itemsProcessed++;
-          console.log(itemsProcessed + " vs " + repos.length);
-
-          if (itemsProcessed === repos.length) {
-            // alert("hi");
           }
         });
       });
-    // alert("done?");
-
-    // octokit.users
-    //   .getByUsername({
-    //     username: this.props.user.login
-    //   })
-    //   .then(({ data, headers, status }) => {
-    //     // this.setState({ users: data.items });
-    //     // console.log("RESULT: " + JSON.stringify(data));
-    //   });
   }
 
   render() {
@@ -101,7 +95,7 @@ export default class ProfileResult extends React.Component {
             <span className="profile__h2--normal">YES: {user.hireable}</span>
           </span>
           <div className="profile__divider"></div>
-          <div className="profile__h3">Hey there this is my bio...</div>
+          <div className="profile__h3">{this.state.languages}</div>
         </div>
       </div>
     );
