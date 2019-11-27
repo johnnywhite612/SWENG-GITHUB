@@ -4,19 +4,16 @@ import axios from "axios";
 export default class ProfileResult extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { languages: [], user: [], repos: [] };
+    this.state = { languages: [], user: [], repos: [], languageStats: [] };
   }
 
   OpenProfile() {
     this.props.viewDashboard(
       this.state.user,
       this.state.repos,
-      this.state.languages
+      this.state.languages,
+      this.state.languageStats
     );
-  }
-
-  componentDidUpdate() {
-    console.log("rendered");
   }
 
   componentDidMount() {
@@ -82,7 +79,8 @@ export default class ProfileResult extends React.Component {
                 repoCount++;
                 if (repoCount === repoTotal) {
                   this.setState({
-                    languages: [...languageCalculations.keys()]
+                    languages: [...languageCalculations.keys()],
+                    languageStats: [...languageCalculations]
                   });
                   this.props.increment(this.props.user.login);
                   ///DO SOMETHING!!
@@ -98,7 +96,8 @@ export default class ProfileResult extends React.Component {
               //We have finished analyzing this user, now save their languages to state
               //Also increment parent component
               this.setState({
-                languages: [...languageCalculations.keys()]
+                languages: [...languageCalculations.keys()],
+                languageStats: [...languageCalculations]
               });
               this.props.increment(this.props.user.login);
               ///DO SOMETHING!!
@@ -112,6 +111,7 @@ export default class ProfileResult extends React.Component {
   render() {
     let user = this.props.user;
     let languageFilters = this.props.languageFilters;
+
     let showProfile = true;
     languageFilters.forEach(language => {
       if (!this.state.languages.includes(language)) {

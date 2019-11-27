@@ -19,7 +19,11 @@ export default class Search extends React.Component {
         { index: 4, name: "JavaScript", selected: false },
         { index: 5, name: "TypeScript", selected: false },
         { index: 6, name: "HTML", selected: false },
-        { index: 7, name: "CSS", selected: false }
+        { index: 7, name: "CSS", selected: false },
+        { index: 8, name: "Shell", selected: false },
+        { index: 9, name: "C", selected: false },
+        { index: 10, name: "C++", selected: false },
+        { index: 11, name: "C#", selected: false }
       ],
       users: [],
       loading: true,
@@ -78,8 +82,8 @@ export default class Search extends React.Component {
     }
   }
 
-  viewDashboard(user, repos, languages) {
-    let selectedProfile = { user, repos, languages };
+  viewDashboard(user, repos, languages, languageStats) {
+    let selectedProfile = { user, repos, languages, languageStats };
     this.setState({ viewDashboard: true, selectedProfile: selectedProfile });
   }
 
@@ -103,7 +107,7 @@ export default class Search extends React.Component {
         <div className="search__loading-bar">
           <div style={loadingBarStyle}>
             <div className="search__loading-text">
-              {Math.round((this.loadingCounter / 29) * 100) + "%"} - Loading
+              {Math.round((this.loadingCounter / 29) * 100) + "%"} - Calculating
               results...
             </div>
           </div>
@@ -133,6 +137,18 @@ export default class Search extends React.Component {
       }
     });
 
+    let dashboardView;
+    if (this.state.viewDashboard) {
+      dashboardView = (
+        <Dashboard
+          hideDashboard={this.hideDashboard}
+          data={this.state.selectedProfile}
+        />
+      );
+    } else {
+      dashboardView = <></>;
+    }
+
     const profileResults = this.state.users.map(user => (
       <Profile
         history={this.props.history}
@@ -142,15 +158,10 @@ export default class Search extends React.Component {
         viewDashboard={this.viewDashboard}
       />
     ));
-    if (this.state.viewDashboard) {
-      return (
-        <Dashboard
-          hideDashboard={this.hideDashboard}
-          data={this.state.selectedProfile}
-        />
-      );
-    } else {
-      return (
+
+    return (
+      <>
+        {dashboardView}
         <div className="search">
           <div className="search__top-bar">
             <span className="search__title-text">Location:</span>
@@ -163,7 +174,7 @@ export default class Search extends React.Component {
           </div>
           <div className="search__bottom-section">
             <div className="search__side-bar">
-              <div className="search__purple-heading">Which languages:</div>
+              <div className="search__purple-heading">Filter by language:</div>
               <div className="search__language-list">{languageTags}</div>
               <hr></hr>
               <div className="search__purple-heading">Other metrics:</div>
@@ -174,7 +185,7 @@ export default class Search extends React.Component {
             </div>
           </div>
         </div>
-      );
-    }
+      </>
+    );
   }
 }
