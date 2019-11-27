@@ -15,11 +15,14 @@ export default class Dashboard extends React.Component {
     let repos = this.props.data.repos;
     let languages = this.props.data.languages;
     let languageStats = this.props.data.languageStats;
+    //Here we receive a hashmap of the high scores for the area
+    let languageScoresHM = this.props.languageScores;
     this.setState({
       user: user,
       repos: repos,
       languages: languages,
-      languageStats: languageStats
+      languageStats: languageStats,
+      languageScoresHM: languageScoresHM
     });
   }
 
@@ -105,12 +108,14 @@ export default class Dashboard extends React.Component {
             </div>
           </div>
           <div className="dashboard__row">
-            <div className="dashboard__block dashboard__block--block-3">
+            <div className="dashboard__block dashboard__block--block-3"></div>
+            <div className="dashboard__block dashboard__block--block-4">
               <CompareLanguageGraph
                 languageStats={this.props.data.languageStats}
+                languageScores={this.props.languageScores}
+                userName={this.props.data.user.login}
               />
             </div>
-            <div className="dashboard__block dashboard__block--block-4"></div>
           </div>
         </div>
       </div>

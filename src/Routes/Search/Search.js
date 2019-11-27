@@ -10,6 +10,7 @@ export default class Search extends React.Component {
   constructor(props) {
     super(props);
     this.loadingCounter = 0;
+    this.languageScores = new Map();
     this.state = {
       languages: [
         { index: 0, name: "Java", selected: false },
@@ -28,12 +29,14 @@ export default class Search extends React.Component {
       users: [],
       loading: true,
       viewDashboard: false,
-      selectedProfile: {}
+      selectedProfile: {},
+      MAX_SEARCH_LIMIT: 20
     };
     this.SelectLanguage = this.SelectLanguage.bind(this);
     this.IncrementLoadCounter = this.IncrementLoadCounter.bind(this);
     this.viewDashboard = this.viewDashboard.bind(this);
     this.hideDashboard = this.hideDashboard.bind(this);
+    this.registerScore = this.registerScore.bind(this);
   }
 
   SelectLanguage(index, value) {
@@ -66,7 +69,7 @@ export default class Search extends React.Component {
     octokit.search
       .users({
         q: "type:user location:" + searchQuery,
-        per_page: 30,
+        per_page: this.state.MAX_SEARCH_LIMIT,
         page: 1
       })
       .then(({ data, headers, status }) => {
@@ -77,7 +80,7 @@ export default class Search extends React.Component {
   IncrementLoadCounter(username) {
     this.loadingCounter += 1;
     this.setState({});
-    if (this.loadingCounter >= 27) {
+    if (this.loadingCounter >= this.state.MAX_SEARCH_LIMIT - 5) {
       this.setState({ loading: false });
     }
   }
@@ -91,10 +94,32 @@ export default class Search extends React.Component {
     this.setState({ viewDashboard: false });
   }
 
+  registerScore(userScores) {
+    //We've been given the scores of a user
+    //For each language on the list, compare with the global score for that language
+    // -> if bigger, register the high score
+    userScores.forEach(language => {
+      if (!this.languageScores.has(language[0])) {
+        //If it doesn't have the language yet, register it to the hash map
+        this.languageScores.set(language[0], language[1]);
+      } else {
+        //If it does, check the current score, compare and take appropriate actions
+        let currentScore = this.languageScores.get(language[0]);
+        if (currentScore < language[1]) {
+          //This user has more lines of code and thus wins, register new score
+          this.languageScores.set(language[0], language[1]);
+        } else {
+          //Do nothing!
+        }
+      }
+    });
+  }
+
   render() {
     var loadingBarStyle = {
       height: "auto",
-      width: (this.loadingCounter / 29) * 100 + "%",
+      width:
+        (this.loadingCounter / (this.state.MAX_SEARCH_LIMIT - 3)) * 100 + "%",
       color: "white",
       backgroundColor: "#E8E8E8",
       padding: "10px",
@@ -107,8 +132,10 @@ export default class Search extends React.Component {
         <div className="search__loading-bar">
           <div style={loadingBarStyle}>
             <div className="search__loading-text">
-              {Math.round((this.loadingCounter / 29) * 100) + "%"} - Calculating
-              results...
+              {Math.round(
+                (this.loadingCounter / (this.state.MAX_SEARCH_LIMIT - 3)) * 100
+              ) + "%"}{" "}
+              - Calculating results...
             </div>
           </div>
         </div>
@@ -143,6 +170,8 @@ export default class Search extends React.Component {
         <Dashboard
           hideDashboard={this.hideDashboard}
           data={this.state.selectedProfile}
+          //Pass the hashmap of highest user scores for the stats
+          languageScores={this.languageScores}
         />
       );
     } else {
@@ -156,6 +185,7 @@ export default class Search extends React.Component {
         languageFilters={languageFilters}
         increment={this.IncrementLoadCounter}
         viewDashboard={this.viewDashboard}
+        registerScore={this.registerScore}
       />
     ));
 

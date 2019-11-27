@@ -292,3 +292,15 @@ b {
   width: 40px;
   margin: auto;
 }
+
+.dashboard__extra-1 {
+  width: 85%;
+  height: auto;
+  margin: auto;
+  /* margin-left: 10px; */
+}
+
+.dashboard__extra-2 {
+  padding-left: 30px;
+  padding-right: 30px;
+}

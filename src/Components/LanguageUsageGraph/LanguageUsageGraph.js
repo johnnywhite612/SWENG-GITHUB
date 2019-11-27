@@ -22,7 +22,7 @@ export default class LanguageUsageGraph extends React.Component {
     languageData.sort(function(a, b) {
       return b[1] - a[1];
     });
-    if (languageData.length >= 2) languageData = languageData.slice(0, 2);
+    if (languageData.length >= 3) languageData = languageData.slice(0, 3);
 
     //     console.log("THEN: " + JSON.stringify(languageData));
 

@@ -77,11 +77,26 @@ export default class ProfileResult extends React.Component {
                 });
                 //Finished cycling through repo - maybe increment counter
                 repoCount++;
-                if (repoCount === repoTotal) {
+                console.log(
+                  "USER: " +
+                    this.props.user.login +
+                    " - " +
+                    repoCount +
+                    " / " +
+                    repoTotal
+                );
+                if (repoCount >= repoTotal) {
+                  console.log(
+                    "THIS? " +
+                      [...languageCalculations.keys()] +
+                      " : " +
+                      this.props.user.login
+                  );
                   this.setState({
                     languages: [...languageCalculations.keys()],
                     languageStats: [...languageCalculations]
                   });
+                  this.props.registerScore([...languageCalculations]);
                   this.props.increment(this.props.user.login);
                   ///DO SOMETHING!!
                   //Increment finished repos and compare
@@ -99,6 +114,7 @@ export default class ProfileResult extends React.Component {
                 languages: [...languageCalculations.keys()],
                 languageStats: [...languageCalculations]
               });
+              // this.props.registerScore([...languageCalculations]);
               this.props.increment(this.props.user.login);
               ///DO SOMETHING!!
               masterCount += 1;
