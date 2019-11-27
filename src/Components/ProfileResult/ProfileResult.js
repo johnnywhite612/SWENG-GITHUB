@@ -21,7 +21,7 @@ export default class ProfileResult extends React.Component {
 
     const Octokit = require("@octokit/rest");
     const octokit = new Octokit({
-      auth: "2554723ad1f727badd09e4caa84a1fd4232dd2bc" //"9f84a0aa8cf6242e3d458f3b76446696b6720d39"
+      auth: "e62f1810f04e172aeef186ab8ca6ad2e60696642" //"9f84a0aa8cf6242e3d458f3b76446696b6720d39"
     });
 
     let repos = [];
