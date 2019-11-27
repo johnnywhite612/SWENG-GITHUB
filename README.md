@@ -8,4 +8,4 @@ Please see the link below for finished project:
 
 ## About
 
-I developed this project using Node js, React js, React Router, Victory Data-Visualisation tool, and more. Please see code base for more details.
+I developed this project using Node js, React js, React Router, Victory Data-Visualisation tool, and a few other misc tools. Please see code base for more details.
