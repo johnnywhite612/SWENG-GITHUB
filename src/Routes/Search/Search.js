@@ -8,6 +8,7 @@ import "./Search.css";
 export default class Search extends React.Component {
   constructor(props) {
     super(props);
+    this.loadingCounter = 0;
     this.state = {
       languages: [
         { index: 0, name: "Java", selected: false },
@@ -19,9 +20,11 @@ export default class Search extends React.Component {
         { index: 6, name: "HTML", selected: false },
         { index: 7, name: "CSS", selected: false }
       ],
-      users: []
+      users: [],
+      loading: true
     };
     this.SelectLanguage = this.SelectLanguage.bind(this);
+    this.IncrementLoadCounter = this.IncrementLoadCounter.bind(this);
   }
 
   SelectLanguage(index, value) {
@@ -48,13 +51,13 @@ export default class Search extends React.Component {
 
     const Octokit = require("@octokit/rest");
     const octokit = new Octokit({
-      auth: "9f84a0aa8cf6242e3d458f3b76446696b6720d39"
+      auth: "9f84a0aa8cf6242e3d458f3b76446696b6720d39" //"2554723ad1f727badd09e4caa84a1fd4232dd2bc" //
     });
 
     octokit.search
       .users({
         q: "type:user location:" + searchQuery,
-        per_page: 50,
+        per_page: 30,
         page: 1
       })
       .then(({ data, headers, status }) => {
@@ -62,7 +65,40 @@ export default class Search extends React.Component {
       });
   }
 
+  IncrementLoadCounter(username) {
+    this.loadingCounter += 1;
+    this.setState({});
+    if (this.loadingCounter >= 29) {
+      this.setState({ loading: false });
+    }
+  }
+
   render() {
+    var loadingBarStyle = {
+      height: "auto",
+      width: (this.loadingCounter / 29) * 100 + "%",
+      color: "white",
+      backgroundColor: "#E8E8E8",
+      padding: "10px",
+      margin: "0px",
+      textAlign: "center"
+    };
+    let loadingBar;
+    if (this.state.loading) {
+      loadingBar = (
+        <div className="search__loading-bar">
+          <div style={loadingBarStyle}>
+            <div className="search__loading-text">
+              {Math.round((this.loadingCounter / 29) * 100) + "%"} - Loading
+              results...
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      loadingBar = <></>;
+    }
+
     const languageTags = this.state.languages.map(language => (
       <div
         className={
@@ -88,6 +124,7 @@ export default class Search extends React.Component {
         history={this.props.history}
         user={user}
         languageFilters={languageFilters}
+        increment={this.IncrementLoadCounter}
       />
     ));
 
@@ -109,7 +146,10 @@ export default class Search extends React.Component {
             <hr></hr>
             <div className="search__purple-heading">Other metrics:</div>
           </div>
-          <div className="search__results-section">{profileResults}</div>
+          <div className="search__results-block">
+            {loadingBar}
+            <div className="search__results-section">{profileResults}</div>
+          </div>
         </div>
       </div>
     );

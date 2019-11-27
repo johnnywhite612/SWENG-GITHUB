@@ -66,15 +66,19 @@
 }
 
 .profile__h3 {
+  display: block;
   font-family: "Calibre";
   font-weight: normal;
-  font-size: 20px;
-  line-height: 20px;
+  font-size: 18px;
+  line-height: 18px;
   color: var(--black-color);
   margin: 0px;
   text-align: justify;
   padding: 10px 20px 10px 20px;
-  text-overflow: ellipsis;
+  height: 60px;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .profile__divider {

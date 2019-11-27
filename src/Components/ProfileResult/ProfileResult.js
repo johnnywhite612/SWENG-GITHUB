@@ -15,11 +15,20 @@ export default class ProfileResult extends React.Component {
     });
   }
 
-  componentWillMount() {
+  componentDidUpdate() {
+    console.log("rendered");
+  }
+
+  componentDidMount() {
+    let masterCount = 0;
+
     const Octokit = require("@octokit/rest");
     const octokit = new Octokit({
-      auth: "9f84a0aa8cf6242e3d458f3b76446696b6720d39"
+      auth: "9f84a0aa8cf6242e3d458f3b76446696b6720d39" //"2554723ad1f727badd09e4caa84a1fd4232dd2bc" //
     });
+
+    let repos = [];
+    let languageCalculations = new Map();
 
     //We'll first get the full profile data for our user
     octokit.users
@@ -30,9 +39,6 @@ export default class ProfileResult extends React.Component {
         this.setState({ user: data });
       });
 
-    let repos = [];
-    let languageCalculations = new Map();
-
     octokit
       .request("GET /users/" + this.props.user.login + "/repos")
       .then(({ data, headers, status }) => {
@@ -42,6 +48,9 @@ export default class ProfileResult extends React.Component {
       })
       .then(() => {
         //With our list of repos, get the languages listed under each repo name
+        let repoTotal = repos.length;
+        let repoCount = 0;
+
         repos.forEach(repo => {
           //If the repo was forked, we won't consider it as owned by this user
           if (repo.fork === false) {
@@ -68,10 +77,32 @@ export default class ProfileResult extends React.Component {
                     languageCalculations.set(language, languageCount);
                   }
                 });
-                this.setState({
-                  languages: [...languageCalculations.keys()]
-                });
+                //Finished cycling through repo - maybe increment counter
+                repoCount++;
+                if (repoCount === repoTotal) {
+                  this.setState({
+                    languages: [...languageCalculations.keys()]
+                  });
+                  this.props.increment(this.props.user.login);
+                  ///DO SOMETHING!!
+                  //Increment finished repos and compare
+                  masterCount += 1;
+                  // console.log(masterCount + " / 50");
+                }
               });
+          } else {
+            repoCount++;
+            repoCount++;
+            if (repoCount === repoTotal) {
+              //We have finished analyzing this user, now save their languages to state
+              //Also increment parent component
+              this.setState({
+                languages: [...languageCalculations.keys()]
+              });
+              this.props.increment(this.props.user.login);
+              ///DO SOMETHING!!
+              masterCount += 1;
+            }
           }
         });
       });
@@ -79,7 +110,6 @@ export default class ProfileResult extends React.Component {
 
   render() {
     let user = this.props.user;
-    console.log(JSON.stringify(user));
     let languageFilters = this.props.languageFilters;
     let showProfile = true;
     languageFilters.forEach(language => {
@@ -87,6 +117,7 @@ export default class ProfileResult extends React.Component {
         showProfile = false;
       }
     });
+
     if (showProfile) {
       return (
         <div className="profile" onClick={() => this.OpenProfile()}>
