@@ -58,7 +58,7 @@ export default class CompareLanguageGraph extends React.Component {
                 style={{
                   data: { fill: "#7600ff" },
                   labels: {
-                    fontSize: 100,
+                    fontSize: 50,
                     fill: "black"
                   }
                 }}

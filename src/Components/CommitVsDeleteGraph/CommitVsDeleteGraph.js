@@ -60,7 +60,7 @@ export default class CommitVsDeleteGraph extends React.Component {
     return (
       <>
         <div className="dashboard__block-h1">Commits vs Deletions</div>
-        <svg viewBox="0 0 400 400">
+        <svg viewBox="0 0 400 400" className="dashboard__extra-3">
           <VictoryPie
             standalone={false}
             width={400}
