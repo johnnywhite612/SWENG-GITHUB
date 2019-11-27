@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c21825d5.chunk.css",
+    "main.js": "/static/js/main.e1f1bfbe.chunk.js",
+    "main.js.map": "/static/js/main.e1f1bfbe.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.2339616a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.2339616a.js.map",
+    "static/js/2.ea495371.chunk.js": "/static/js/2.ea495371.chunk.js",
+    "static/js/2.ea495371.chunk.js.map": "/static/js/2.ea495371.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.882d5f0052ac75e1ecb8c9848b0b5cb6.js": "/precache-manifest.882d5f0052ac75e1ecb8c9848b0b5cb6.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.c21825d5.chunk.css.map": "/static/css/main.c21825d5.chunk.css.map",
+    "static/media/CalibreBlack.woff": "/static/media/CalibreBlack.1ea38e9a.woff",
+    "static/media/CalibreBold.woff": "/static/media/CalibreBold.b99fc08d.woff",
+    "static/media/CalibreLight.woff": "/static/media/CalibreLight.ed571050.woff",
+    "static/media/CalibreMedium.woff": "/static/media/CalibreMedium.48619aaa.woff",
+    "static/media/CalibreRegular.woff": "/static/media/CalibreRegular.c5b01b24.woff",
+    "static/media/CalibreSemibold.woff": "/static/media/CalibreSemibold.0cf4497b.woff",
+    "static/media/closeBtn.svg": "/static/media/closeBtn.d8cdfa89.svg",
+    "static/media/logo.svg": "/static/media/logo.f3838646.svg",
+    "static/media/searchIcon.svg": "/static/media/searchIcon.1aa4186c.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2339616a.js",
+    "static/js/2.ea495371.chunk.js",
+    "static/css/main.c21825d5.chunk.css",
+    "static/js/main.e1f1bfbe.chunk.js"
+  ]
+}

@@ -25,6 +25,20 @@ h2 {
   margin: 0px;
 }
 
+.home__blurb {
+  font-family: "Calibre";
+  font-weight: 400;
+  font-size: 18px;
+  color: white;
+  margin: auto;
+  position: fixed;
+  width: 50%;
+  left: 0px;
+  right: 0px;
+  bottom: 20px;
+  text-align: center;
+}
+
 /* Main Block Styles */
 .home {
   background-image: linear-gradient(

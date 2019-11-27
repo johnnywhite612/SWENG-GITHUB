@@ -215,7 +215,10 @@ export default class Search extends React.Component {
               <div className="search__black-body">
                 This app analyses approximately 50 developers in the searched
                 location. You can filter developers by programming language.
-                Please give it time to fully load, thanks!
+                Click on a user to the right to view stats about their profile
+                to help judge whether you'd like to hire them or not. If the
+                graphs aren't loading, go back and wait 5 seconds, and then try
+                again. Thank you!
               </div>
             </div>
             <div className="search__results-block">

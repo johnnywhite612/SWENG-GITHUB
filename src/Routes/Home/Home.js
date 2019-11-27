@@ -35,6 +35,11 @@ export default class Home extends React.Component {
     return (
       <div className="home">
         <img src={logo} className="home__logo" />
+        <div className="home__blurb">
+          <b>Re(po)cruit © 2019 |</b> A project developed by Jonathan White for
+          the Software Engineering Module (CS3012) in Trinity College. All code
+          and graphic design is my own work.
+        </div>
         <div className="home__centre">
           <div className="home__title-blurb">
             <h1>Hey recruiter!</h1>
