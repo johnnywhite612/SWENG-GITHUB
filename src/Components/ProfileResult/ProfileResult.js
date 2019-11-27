@@ -4,15 +4,15 @@ import axios from "axios";
 export default class ProfileResult extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { languages: [], user: [] };
+    this.state = { languages: [], user: [], repos: [] };
   }
 
   OpenProfile() {
-    this.props.history.push({
-      pathname: "/profile",
-      search: "",
-      state: {}
-    });
+    this.props.viewDashboard(
+      this.state.user,
+      this.state.repos,
+      this.state.languages
+    );
   }
 
   componentDidUpdate() {
@@ -42,6 +42,7 @@ export default class ProfileResult extends React.Component {
     octokit
       .request("GET /users/" + this.props.user.login + "/repos")
       .then(({ data, headers, status }) => {
+        this.setState({ repos: data });
         data.forEach(repo => {
           if (repo) repos.push(repo);
         });
@@ -117,7 +118,7 @@ export default class ProfileResult extends React.Component {
         showProfile = false;
       }
     });
-
+    // console.log("HIRE: " + this.state.user.hireable);
     if (showProfile) {
       return (
         <div className="profile" onClick={() => this.OpenProfile()}>
@@ -126,7 +127,9 @@ export default class ProfileResult extends React.Component {
             <div className="profile__h1">{user.login}</div>
             <span className="profile__h2">
               Hireable:{" "}
-              <span className="profile__h2--normal">YES: {user.hireable}</span>
+              <span className="profile__h2--normal">
+                {this.state.user.hireable ? "YES" : "NO"}
+              </span>
             </span>
             <div className="profile__divider"></div>
             <div className="profile__h3">{this.state.user.bio}</div>

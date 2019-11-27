@@ -21,7 +21,7 @@
 }
 
 .profile__card {
-  width: 250px;
+  width: 280px;
   height: 300px;
   background-color: #f5f6f9;
   border-radius: 30px;
@@ -73,7 +73,7 @@
   line-height: 18px;
   color: var(--black-color);
   margin: 0px;
-  text-align: justify;
+  text-align: left;
   padding: 10px 20px 10px 20px;
   height: 60px;
   overflow: hidden;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 
+import Dashboard from "../Dashboard/Dashboard";
 import Profile from "../../Components/ProfileResult/ProfileResult";
 import closeBtn from "../../assets/img/closeBtn.svg";
 import "./Search.css";
@@ -21,10 +22,14 @@ export default class Search extends React.Component {
         { index: 7, name: "CSS", selected: false }
       ],
       users: [],
-      loading: true
+      loading: true,
+      viewDashboard: false,
+      selectedProfile: {}
     };
     this.SelectLanguage = this.SelectLanguage.bind(this);
     this.IncrementLoadCounter = this.IncrementLoadCounter.bind(this);
+    this.viewDashboard = this.viewDashboard.bind(this);
+    this.hideDashboard = this.hideDashboard.bind(this);
   }
 
   SelectLanguage(index, value) {
@@ -71,6 +76,15 @@ export default class Search extends React.Component {
     if (this.loadingCounter >= 29) {
       this.setState({ loading: false });
     }
+  }
+
+  viewDashboard(user, repos, languages) {
+    let selectedProfile = { user, repos, languages };
+    this.setState({ viewDashboard: true, selectedProfile: selectedProfile });
+  }
+
+  hideDashboard() {
+    this.setState({ viewDashboard: false });
   }
 
   render() {
@@ -125,33 +139,42 @@ export default class Search extends React.Component {
         user={user}
         languageFilters={languageFilters}
         increment={this.IncrementLoadCounter}
+        viewDashboard={this.viewDashboard}
       />
     ));
-
-    return (
-      <div className="search">
-        <div className="search__top-bar">
-          <span className="search__title-text">Location:</span>
-          <span className="search__title-search">{this.state.search}</span>
-          <img
-            src={closeBtn}
-            className="search__close-btn"
-            onClick={() => this.CloseWindow()}
-          />
-        </div>
-        <div className="search__bottom-section">
-          <div className="search__side-bar">
-            <div className="search__purple-heading">Which languages:</div>
-            <div className="search__language-list">{languageTags}</div>
-            <hr></hr>
-            <div className="search__purple-heading">Other metrics:</div>
+    if (this.state.viewDashboard) {
+      return (
+        <Dashboard
+          hideDashboard={this.hideDashboard}
+          data={this.state.selectedProfile}
+        />
+      );
+    } else {
+      return (
+        <div className="search">
+          <div className="search__top-bar">
+            <span className="search__title-text">Location:</span>
+            <span className="search__title-search">{this.state.search}</span>
+            <img
+              src={closeBtn}
+              className="search__close-btn"
+              onClick={() => this.CloseWindow()}
+            />
           </div>
-          <div className="search__results-block">
-            {loadingBar}
-            <div className="search__results-section">{profileResults}</div>
+          <div className="search__bottom-section">
+            <div className="search__side-bar">
+              <div className="search__purple-heading">Which languages:</div>
+              <div className="search__language-list">{languageTags}</div>
+              <hr></hr>
+              <div className="search__purple-heading">Other metrics:</div>
+            </div>
+            <div className="search__results-block">
+              {loadingBar}
+              <div className="search__results-section">{profileResults}</div>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
