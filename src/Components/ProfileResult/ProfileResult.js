@@ -4,7 +4,7 @@ import axios from "axios";
 export default class ProfileResult extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { languages: [] };
+    this.state = { languages: [], user: [] };
   }
 
   OpenProfile() {
@@ -21,19 +21,21 @@ export default class ProfileResult extends React.Component {
       auth: "9f84a0aa8cf6242e3d458f3b76446696b6720d39"
     });
 
+    //We'll first get the full profile data for our user
+    octokit.users
+      .getByUsername({
+        username: this.props.user.login
+      })
+      .then(({ data }) => {
+        this.setState({ user: data });
+      });
+
     let repos = [];
     let languageCalculations = new Map();
-    let finalRepo = "";
 
-    //Get repos for user
-    octokit.repos
-      .listForOrg({
-        org: this.props.user.login
-      })
+    octokit
+      .request("GET /users/" + this.props.user.login + "/repos")
       .then(({ data, headers, status }) => {
-        console.log(JSON.stringify(data.length));
-        if (data.length > 0) finalRepo = data[data.length - 1].name;
-        console.log("FINAL REPO:" + finalRepo);
         data.forEach(repo => {
           if (repo) repos.push(repo);
         });
@@ -66,15 +68,8 @@ export default class ProfileResult extends React.Component {
                     languageCalculations.set(language, languageCount);
                   }
                 });
-                // console.log(
-                //   selectedRepo +
-                //     " vs " +
-                //     finalRepo +
-                //     " FOR " +
-                //     this.props.user.login
-                // );
                 this.setState({
-                  languages: JSON.stringify([...languageCalculations])
+                  languages: [...languageCalculations.keys()]
                 });
               });
           }
@@ -84,20 +79,31 @@ export default class ProfileResult extends React.Component {
 
   render() {
     let user = this.props.user;
-
-    return (
-      <div className="profile" onClick={() => this.OpenProfile()}>
-        <div className="profile__card">
-          <img src={user.avatar_url} className="profile__image" />
-          <div className="profile__h1">{user.login}</div>
-          <span className="profile__h2">
-            Hireable:{" "}
-            <span className="profile__h2--normal">YES: {user.hireable}</span>
-          </span>
-          <div className="profile__divider"></div>
-          <div className="profile__h3">{this.state.languages}</div>
+    console.log(JSON.stringify(user));
+    let languageFilters = this.props.languageFilters;
+    let showProfile = true;
+    languageFilters.forEach(language => {
+      if (!this.state.languages.includes(language)) {
+        showProfile = false;
+      }
+    });
+    if (showProfile) {
+      return (
+        <div className="profile" onClick={() => this.OpenProfile()}>
+          <div className="profile__card">
+            <img src={user.avatar_url} className="profile__image" />
+            <div className="profile__h1">{user.login}</div>
+            <span className="profile__h2">
+              Hireable:{" "}
+              <span className="profile__h2--normal">YES: {user.hireable}</span>
+            </span>
+            <div className="profile__divider"></div>
+            <div className="profile__h3">{this.state.user.bio}</div>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return <></>;
+    }
   }
 }

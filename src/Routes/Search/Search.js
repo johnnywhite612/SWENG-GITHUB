@@ -12,19 +12,30 @@ export default class Search extends React.Component {
       languages: [
         { index: 0, name: "Java", selected: false },
         { index: 1, name: "Python", selected: false },
-        { index: 2, name: "JavaScript", selected: false },
-        { index: 3, name: "Haskell", selected: false },
-        { index: 4, name: "HTML", selected: false },
-        { index: 5, name: "CSS", selected: false }
+        { index: 2, name: "Ruby", selected: false },
+        { index: 3, name: "PHP", selected: false },
+        { index: 4, name: "JavaScript", selected: false },
+        { index: 5, name: "TypeScript", selected: false },
+        { index: 6, name: "HTML", selected: false },
+        { index: 7, name: "CSS", selected: false }
       ],
       users: []
     };
+    this.SelectLanguage = this.SelectLanguage.bind(this);
   }
 
   SelectLanguage(index, value) {
-    let update = [...this.state.languages];
-    update[index].selected = value;
-    this.setState({ languages: update });
+    let selectedLanguages = 0;
+    this.state.languages.forEach(language => {
+      if (language.selected) {
+        selectedLanguages++;
+      }
+    });
+    if (selectedLanguages <= 2 || value === false) {
+      let update = [...this.state.languages];
+      update[index].selected = value;
+      this.setState({ languages: update });
+    }
   }
 
   CloseWindow() {
@@ -33,6 +44,7 @@ export default class Search extends React.Component {
 
   componentDidMount() {
     let searchQuery = this.props.location.state.search;
+    this.setState({ search: searchQuery });
 
     const Octokit = require("@octokit/rest");
     const octokit = new Octokit({
@@ -41,8 +53,8 @@ export default class Search extends React.Component {
 
     octokit.search
       .users({
-        q: "type:org location:" + searchQuery,
-        per_page: 12,
+        q: "type:user location:" + searchQuery,
+        per_page: 50,
         page: 1
       })
       .then(({ data, headers, status }) => {
@@ -64,15 +76,26 @@ export default class Search extends React.Component {
       </div>
     ));
 
+    let languageFilters = [];
+    this.state.languages.forEach(language => {
+      if (language.selected === true) {
+        languageFilters.push(language.name);
+      }
+    });
+
     const profileResults = this.state.users.map(user => (
-      <Profile history={this.props.history} user={user} />
+      <Profile
+        history={this.props.history}
+        user={user}
+        languageFilters={languageFilters}
+      />
     ));
 
     return (
       <div className="search">
         <div className="search__top-bar">
           <span className="search__title-text">Location:</span>
-          <span className="search__title-search">Dublin, Ireland</span>
+          <span className="search__title-search">{this.state.search}</span>
           <img
             src={closeBtn}
             className="search__close-btn"
