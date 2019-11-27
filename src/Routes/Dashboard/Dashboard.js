@@ -1,6 +1,7 @@
 import React from "react";
 import closeBtn from "../../assets/img/closeBtn.svg";
 import "./Dashboard.css";
+import WeeklyCommitGraph from "../../Components/WeeklyCommitGraph/WeeklyCommitGraph";
 
 export default class Dashboard extends React.Component {
   constructor(props) {
@@ -10,8 +11,10 @@ export default class Dashboard extends React.Component {
 
   componentDidMount() {
     let user = this.props.data.user;
-    // console.log(JSON.stringify(user));
-    this.setState({ user: user });
+    let repos = this.props.data.repos;
+    console.log("RECEIVED: " + JSON.stringify(repos));
+    let languages = this.props.data.languages;
+    this.setState({ user: user, repos: repos, languages: languages });
   }
 
   CloseWindow() {
@@ -20,6 +23,7 @@ export default class Dashboard extends React.Component {
 
   render() {
     let user = this.state.user;
+
     return (
       <div className="dashboard">
         <div className="dashboard__back-button">
@@ -36,7 +40,18 @@ export default class Dashboard extends React.Component {
         </div>
         <div className="dashboard__main">
           <div className="dashboard__row">
-            <div className="dashboard__block dashboard__block--block-1"></div>
+            <div className="dashboard__block dashboard__block--block-1">
+              <div className="dashboard__block-h1">Daily commit count</div>
+              <div className="dashboard__block-h3">
+                Frequency of {user.login}'s commits based on week day.
+              </div>
+              <div className="dashboard__block-container">
+                <WeeklyCommitGraph
+                  repos={this.props.data.repos}
+                  user={this.props.data.user}
+                />
+              </div>
+            </div>
             <div className="dashboard__block dashboard__block--block-2"></div>
           </div>
           <div className="dashboard__row">

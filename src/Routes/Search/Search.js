@@ -73,7 +73,7 @@ export default class Search extends React.Component {
   IncrementLoadCounter(username) {
     this.loadingCounter += 1;
     this.setState({});
-    if (this.loadingCounter >= 29) {
+    if (this.loadingCounter >= 27) {
       this.setState({ loading: false });
     }
   }
