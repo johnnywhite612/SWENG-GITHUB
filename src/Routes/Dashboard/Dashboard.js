@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import WeeklyCommitGraph from "../../Components/WeeklyCommitGraph/WeeklyCommitGraph";
 import LanguageUsageGraph from "../../Components/LanguageUsageGraph/LanguageUsageGraph";
 import CompareLanguageGraph from "../../Components/CompareLanguageGraph/CompareLanguageGraph";
+import CommitVsDeleteGraph from "../../Components/CommitVsDeleteGraph/CommitVsDeleteGraph";
 export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +33,6 @@ export default class Dashboard extends React.Component {
 
   render() {
     let user = this.state.user;
-    console.log(JSON.stringify(this.state.languages));
     const languageTags = this.state.languages.map(language => (
       <div className={"dashboard__language-item"}>{language}</div>
     ));
@@ -108,7 +108,12 @@ export default class Dashboard extends React.Component {
             </div>
           </div>
           <div className="dashboard__row">
-            <div className="dashboard__block dashboard__block--block-3"></div>
+            <div className="dashboard__block dashboard__block--block-3">
+              <CommitVsDeleteGraph
+                repos={this.props.data.repos}
+                user={this.props.data.user}
+              />
+            </div>
             <div className="dashboard__block dashboard__block--block-4">
               <CompareLanguageGraph
                 languageStats={this.props.data.languageStats}

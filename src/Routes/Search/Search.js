@@ -129,16 +129,20 @@ export default class Search extends React.Component {
     let loadingBar;
     if (this.state.loading) {
       loadingBar = (
-        <div className="search__loading-bar">
-          <div style={loadingBarStyle}>
-            <div className="search__loading-text">
-              {Math.round(
-                (this.loadingCounter / (this.state.MAX_SEARCH_LIMIT - 3)) * 100
-              ) + "%"}{" "}
-              - Calculating results...
+        <>
+          <div className="search_dimmer"></div>
+          <div className="search__loading-bar">
+            <div style={loadingBarStyle}>
+              <div className="search__loading-text">
+                {Math.round(
+                  (this.loadingCounter / (this.state.MAX_SEARCH_LIMIT - 3)) *
+                    100
+                ) + "%"}{" "}
+                - Calculating results...
+              </div>
             </div>
           </div>
-        </div>
+        </>
       );
     } else {
       loadingBar = <></>;
@@ -207,10 +211,16 @@ export default class Search extends React.Component {
               <div className="search__purple-heading">Filter by language:</div>
               <div className="search__language-list">{languageTags}</div>
               <hr></hr>
-              <div className="search__purple-heading">Other metrics:</div>
+              <div className="search__purple-heading">More info:</div>
+              <div className="search__black-body">
+                This app analyses approximately 50 developers in the searched
+                location. You can filter developers by programming language.
+                Please give it time to fully load, thanks!
+              </div>
             </div>
             <div className="search__results-block">
               {loadingBar}
+
               <div className="search__results-section">{profileResults}</div>
             </div>
           </div>

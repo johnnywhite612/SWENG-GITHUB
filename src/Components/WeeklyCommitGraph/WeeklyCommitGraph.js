@@ -1,16 +1,6 @@
 import React from "react";
 import { VictoryBar, VictoryChart, VictoryAxis } from "victory";
 
-import {
-  XYPlot,
-  VerticalBarSeries,
-  VerticalGridLines,
-  HorizontalGridLines,
-  XAxis,
-  YAxis,
-  LineSeries
-} from "react-vis";
-
 export default class WeeklyCommitGraph extends React.Component {
   constructor(props) {
     super(props);

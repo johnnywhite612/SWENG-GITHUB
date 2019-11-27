@@ -77,21 +77,8 @@ export default class ProfileResult extends React.Component {
                 });
                 //Finished cycling through repo - maybe increment counter
                 repoCount++;
-                console.log(
-                  "USER: " +
-                    this.props.user.login +
-                    " - " +
-                    repoCount +
-                    " / " +
-                    repoTotal
-                );
+
                 if (repoCount >= repoTotal) {
-                  console.log(
-                    "THIS? " +
-                      [...languageCalculations.keys()] +
-                      " : " +
-                      this.props.user.login
-                  );
                   this.setState({
                     languages: [...languageCalculations.keys()],
                     languageStats: [...languageCalculations]
