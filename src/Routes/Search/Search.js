@@ -63,7 +63,7 @@ export default class Search extends React.Component {
 
     const Octokit = require("@octokit/rest");
     const octokit = new Octokit({
-      auth: "9f84a0aa8cf6242e3d458f3b76446696b6720d39" //"2554723ad1f727badd09e4caa84a1fd4232dd2bc" //
+      auth: "2554723ad1f727badd09e4caa84a1fd4232dd2bc" //"9f84a0aa8cf6242e3d458f3b76446696b6720d39"
     });
 
     octokit.search
