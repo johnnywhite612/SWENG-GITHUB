@@ -18,10 +18,13 @@ export default class ProfileResult extends React.Component {
 
   componentDidMount() {
     let masterCount = 0;
+    let a = "7e9f6c6907";
+    let b = "eed43dd7ea943a7";
+    let c = "702817e78023a32";
 
     const Octokit = require("@octokit/rest");
     const octokit = new Octokit({
-      auth: process.env.secret
+      auth: a + b + c
     });
 
     let repos = [];

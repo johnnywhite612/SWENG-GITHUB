@@ -36,9 +36,10 @@
   display: flex;
   flex-direction: column;
   width: 27%;
-  height: 100%;
+  height: auto;
   background-color: var(--light-grey-color);
   padding: 25px;
+  overflow: scroll;
 }
 
 .search__results-block {

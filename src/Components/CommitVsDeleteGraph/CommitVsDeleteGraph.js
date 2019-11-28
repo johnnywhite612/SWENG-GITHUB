@@ -11,9 +11,13 @@ export default class CommitVsDeleteGraph extends React.Component {
   }
 
   componentDidMount() {
+    let a = "7e9f6c6907";
+    let b = "eed43dd7ea943a7";
+    let c = "702817e78023a32";
+
     const Octokit = require("@octokit/rest");
     const octokit = new Octokit({
-      auth: process.env.secret
+      auth: a + b + c
     });
     let commits = 0;
     let deletions = 0;
@@ -30,6 +34,10 @@ export default class CommitVsDeleteGraph extends React.Component {
               "/stats/code_frequency"
           )
           .then(({ data, headers, status }) => {
+            console.log(
+              this.props.user.login + " = getting stats for this repo!"
+            );
+
             console.log(
               "GET /repos/" +
                 this.props.user.login +

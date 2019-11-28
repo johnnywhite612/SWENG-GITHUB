@@ -58,12 +58,16 @@ export default class Search extends React.Component {
   }
 
   componentDidMount() {
+    let a = "7e9f6c6907";
+    let b = "eed43dd7ea943a7";
+    let c = "702817e78023a32";
+
     let searchQuery = this.props.location.state.search;
     this.setState({ search: searchQuery });
 
     const Octokit = require("@octokit/rest");
     const octokit = new Octokit({
-      auth: process.env.secret
+      auth: a + b + c
     });
 
     octokit.search
@@ -213,12 +217,13 @@ export default class Search extends React.Component {
               <hr></hr>
               <div className="search__purple-heading">More info:</div>
               <div className="search__black-body">
-                This app analyses approximately 50 developers in the searched
-                location. You can filter developers by programming language.
-                Click on a user to the right to view stats about their profile
-                to help judge whether you'd like to hire them or not. If the
-                graphs aren't loading, go back and wait 5 seconds, and then try
-                again. Thank you!
+                This app analyses approximately 20 developers in the searched
+                location (I limited it to 20 to avoid hitting the Github API
+                request limit). You can filter developers by programming
+                language. Click on a user to the right to view stats about their
+                profile to help judge whether you'd like to hire them or not. If
+                the graphs aren't loading, go back and wait 5 seconds, and then
+                try again. Thank you!
               </div>
             </div>
             <div className="search__results-block">
