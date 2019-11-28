@@ -16,3 +16,7 @@ The aim of my project was to provide data visualisation of an aspect of the soft
 ## About
 
 I developed this project using Node js, React js, React Router, Victory Data-Visualisation tool, and a few other misc tools. Please see code base for more details.
+
+### See Screenshots Below
+
+![myimage-alt-tag](https://www.dropbox.com/s/hcp5p32weqzhy5o/Screenshot%202019-11-28%20at%2011.36.20.png?raw=1)
