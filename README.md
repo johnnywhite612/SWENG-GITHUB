@@ -19,4 +19,14 @@ I developed this project using Node js, React js, React Router, Victory Data-Vis
 
 ### See Screenshots Below
 
-![myimage-alt-tag](https://www.dropbox.com/s/hcp5p32weqzhy5o/Screenshot%202019-11-28%20at%2011.36.20.png?raw=1)
+#### Home Screen
+
+![Home Screen](https://www.dropbox.com/s/cfthq3hlcxj4oyh/Screenshot%202019-11-28%20at%2011.36.46.png?raw=1)
+
+#### Search Results
+
+![Search Results](https://www.dropbox.com/s/p1uguhbjhnya0k5/Screenshot%202019-11-28%20at%2011.36.36.png?raw=1)
+
+#### User Dashboard & Insights
+
+![User Dashboard](https://www.dropbox.com/s/hcp5p32weqzhy5o/Screenshot%202019-11-28%20at%2011.36.20.png?raw=1)
