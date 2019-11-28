@@ -6,7 +6,8 @@ export default class WeeklyCommitGraph extends React.Component {
     super(props);
     this.state = {
       repos: [],
-      week: []
+      week: [],
+      loading: true
     };
   }
 
@@ -45,7 +46,7 @@ export default class WeeklyCommitGraph extends React.Component {
                 final.push({ day: i + 1, tally: day });
               });
 
-              this.setState({ week: final });
+              this.setState({ week: final, loading: false });
             }
           })
           .then(() => {});
@@ -54,22 +55,26 @@ export default class WeeklyCommitGraph extends React.Component {
   }
 
   render() {
-    return (
-      <>
-        <VictoryChart domainPadding={15}>
-          <VictoryAxis
-            tickValues={[1, 2, 3, 4, 5, 6, 7]}
-            tickFormat={["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]}
-          />
-          <VictoryAxis dependentAxis tickFormat={x => `${x}`} />
-          <VictoryBar
-            data={this.state.week}
-            x="day"
-            y="tally"
-            style={{ data: { fill: "#f9c73a" } }}
-          />
-        </VictoryChart>
-      </>
-    );
+    if (this.state.loading) {
+      return <div className="dashboard__block-h3">Loading! Please wait...</div>;
+    } else {
+      return (
+        <>
+          <VictoryChart domainPadding={15}>
+            <VictoryAxis
+              tickValues={[1, 2, 3, 4, 5, 6, 7]}
+              tickFormat={["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]}
+            />
+            <VictoryAxis dependentAxis tickFormat={x => `${x}`} />
+            <VictoryBar
+              data={this.state.week}
+              x="day"
+              y="tally"
+              style={{ data: { fill: "#f9c73a" } }}
+            />
+          </VictoryChart>
+        </>
+      );
+    }
   }
 }

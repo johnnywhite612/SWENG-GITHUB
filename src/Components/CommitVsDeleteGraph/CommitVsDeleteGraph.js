@@ -6,7 +6,8 @@ export default class CommitVsDeleteGraph extends React.Component {
     super(props);
     this.state = {
       commits: 0,
-      deletions: 0
+      deletions: 0,
+      loading: true
     };
   }
 
@@ -52,7 +53,11 @@ export default class CommitVsDeleteGraph extends React.Component {
               });
               //       console.log("Commits: " + commits + " Deletions: " + deletions);
               if (deletions < 0) deletions *= -1;
-              this.setState({ commits: commits, deletions: deletions });
+              this.setState({
+                commits: commits,
+                deletions: deletions,
+                loading: false
+              });
             }
           })
           .then(() => {});
@@ -68,6 +73,14 @@ export default class CommitVsDeleteGraph extends React.Component {
     return (
       <>
         <div className="dashboard__block-h1">Commits vs Deletions</div>
+        <div className="dashboard__block-h3">
+          {!this.state.loading
+            ? "How much " +
+              this.props.user.login +
+              " commits vs deletes in their repos"
+            : "Loading! Please wait..."}
+        </div>
+
         <svg viewBox="0 0 400 400" className="dashboard__extra-3">
           <VictoryPie
             standalone={false}
