@@ -1,4 +1,4 @@
-# SWENT-GITHUB
+# SWENG-GITHUB
 
 ## Software Engineering (CS3012) Github Social Graph Assignment.
 

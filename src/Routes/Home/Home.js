@@ -43,7 +43,10 @@ export default class Home extends React.Component {
         <div className="home__centre">
           <div className="home__title-blurb">
             <h1>Hey recruiter!</h1>
-            <h2>Type in your location below to start finding developers...</h2>
+            <h2>
+              Type your location below to browse local developers and to measure
+              their performance...
+            </h2>
           </div>
           <div className="home__search-bar">
             <input

@@ -37,8 +37,10 @@ export default class CompareLanguageGraph extends React.Component {
             {this.state.language} - Comparison
           </div>
           <div className="dashboard__block-h3">
-            A comparison of this user's top language ({this.state.language}) vs
-            one of the most active users of {this.state.language} in the area.
+            A comparison of this user's most used language (
+            {this.state.language}) vs one of the most active users of{" "}
+            {this.state.language} in the area. (Measured by comparing total
+            lines of code written in that language)
           </div>
           <div className="dashboard__extra-2">
             <VictoryChart domainPadding={15}>

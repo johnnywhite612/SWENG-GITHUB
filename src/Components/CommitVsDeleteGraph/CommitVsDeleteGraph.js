@@ -77,7 +77,7 @@ export default class CommitVsDeleteGraph extends React.Component {
           {!this.state.loading
             ? "How much " +
               this.props.user.login +
-              " commits vs deletes in their repos"
+              " commits vs deletes in their repos."
             : "Loading! Please wait..."}
         </div>
 

@@ -17,7 +17,6 @@ export default class ProfileResult extends React.Component {
   }
 
   componentDidMount() {
-    let masterCount = 0;
     let a = "7e9f6c6907";
     let b = "eed43dd7ea943a7";
     let c = "702817e78023a32";
@@ -56,6 +55,7 @@ export default class ProfileResult extends React.Component {
           //If the repo was forked, we won't consider it as owned by this user
           if (repo.fork === false) {
             let selectedRepo = repo.name;
+            repoCount++;
             octokit.repos
               .listLanguages({
                 owner: this.props.user.login,
@@ -79,7 +79,6 @@ export default class ProfileResult extends React.Component {
                   }
                 });
                 //Finished cycling through repo - maybe increment counter
-                repoCount++;
 
                 if (repoCount >= repoTotal) {
                   this.setState({
@@ -88,14 +87,9 @@ export default class ProfileResult extends React.Component {
                   });
                   this.props.registerScore([...languageCalculations]);
                   this.props.increment(this.props.user.login);
-                  ///DO SOMETHING!!
-                  //Increment finished repos and compare
-                  masterCount += 1;
-                  // console.log(masterCount + " / 50");
                 }
               });
           } else {
-            repoCount++;
             repoCount++;
             if (repoCount === repoTotal) {
               //We have finished analyzing this user, now save their languages to state
@@ -106,8 +100,6 @@ export default class ProfileResult extends React.Component {
               });
               // this.props.registerScore([...languageCalculations]);
               this.props.increment(this.props.user.login);
-              ///DO SOMETHING!!
-              masterCount += 1;
             }
           }
         });

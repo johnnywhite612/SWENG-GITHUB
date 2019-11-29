@@ -16,6 +16,9 @@ export default class Dashboard extends React.Component {
     let repos = this.props.data.repos;
     let languages = this.props.data.languages;
     let languageStats = this.props.data.languageStats;
+
+    console.log("REPOS: " + JSON.stringify(repos));
+
     //Here we receive a hashmap of the high scores for the area
     let languageScoresHM = this.props.languageScores;
     this.setState({
